@@ -10,7 +10,7 @@ export default function Blogs() {
               <img src={el.img} alt="not found" className="w-full" />
             </div>
             <div>
-              <div>
+              <div className=" mt-2 font-bold text-[20px]">
                 <h3>{el.title}</h3>
               </div>
               <div className="hidden">
