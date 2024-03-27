@@ -1,11 +1,26 @@
 import Blogs from "../components/Blogs";
 import Hero from "../components/Hero";
-import Navbar from "../components/Navbar";
+import { useQuery, gql } from "@apollo/client";
 
 export default function Blog() {
+  const getPost = gql`
+    query post {
+      title
+    }
+  `;
+
+  const { loading, error, data } = useQuery(getPost);
+
+  if (loading) {
+    return <div>loading</div>;
+  } else if (error) {
+    return <div>{error.message}</div>;
+  } else {
+    console.log(data);
+  }
+
   return (
     <div>
-      <Navbar></Navbar>
       <Hero></Hero>
       <Blogs></Blogs>
     </div>

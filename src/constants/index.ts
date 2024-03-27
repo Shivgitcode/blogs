@@ -12,6 +12,7 @@ interface Blog {
 }
 
 export const links: Links[] = [
+  { href: "/", name: "Blogs" },
   { href: "/login", name: "login" },
   { href: "/register", name: "register" },
   { href: "/new", name: "Post blog" },
