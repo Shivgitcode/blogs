@@ -9,6 +9,13 @@ export default function Navbar() {
           <span className=" uppercase font-bold text-[2rem]">My Blog</span>
         </div>
 
+        <div>
+          <Link to="/">Blogs</Link>
+          <Link to="/">Blogs</Link>
+          <Link to="/">Blogs</Link>
+          <Link to="/">Blogs</Link>
+        </div>
+
         <div className="flex items-center font-mediun text-[1.2rem]">
           {links.map((el) => {
             return (

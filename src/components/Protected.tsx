@@ -6,10 +6,10 @@ export default function Protected({
 }: {
   Component: React.ComponentType;
 }) {
-  const isLoggedIn = false;
+  const isLoggedIn = localStorage.getItem("jwt");
   const navigate = useNavigate();
   useEffect(() => {
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       return navigate("/login");
     }
   });

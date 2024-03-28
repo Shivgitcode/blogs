@@ -1,9 +1,12 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [login, setLogin] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
   const loginUser = gql`
     mutation handleLogin($user: LoginInput) {
       loginUser(user: $user)
@@ -25,8 +28,13 @@ export default function Login() {
 
   if (loading) return "submitting";
   if (error) return `${error.message}`;
-  if (data) console.log(data);
-
+  if (data) {
+    if (data) {
+      localStorage.setItem("jwt", data.loginUser);
+      toast.success("logged In successfully");
+      navigate("/");
+    }
+  }
   return (
     <div className="w-screen  flex flex-col items-center justify-center">
       <div className="flex flex-col items-center justify-center w-[35%] py-[4rem] mx-auto mt-[100px]">

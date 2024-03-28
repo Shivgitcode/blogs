@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [register, setRegister] = useState({
@@ -8,6 +8,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const addUser = gql`
     mutation addUser($user: UserInput) {
       registerUser(user: $user)
