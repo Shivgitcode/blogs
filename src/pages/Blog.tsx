@@ -4,8 +4,10 @@ import { useQuery, gql } from "@apollo/client";
 
 export default function Blog() {
   const getPost = gql`
-    query post {
-      title
+    query allPosts {
+      post {
+        title
+      }
     }
   `;
 
