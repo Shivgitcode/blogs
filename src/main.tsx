@@ -3,13 +3,27 @@ import App from "./App.tsx";
 import "./index.css";
 import { AppContextProvider } from "./context/AppContext.tsx";
 import { BrowserRouter } from "react-router-dom";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
 import { Toaster } from "react-hot-toast";
+// import { setContext } from "@apollo/client/link/context";
+
+const link = createHttpLink({
+  uri: "http://localhost:4000/graphql",
+  credentials: "include",
+});
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
+  link: link,
 
   cache: new InMemoryCache(),
+  headers: {
+    authorization: localStorage.getItem("jwt") || "",
+  },
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

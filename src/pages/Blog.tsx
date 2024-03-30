@@ -1,30 +1,36 @@
+import { useEffect, useState } from "react";
 import Blogs from "../components/Blogs";
 import Hero from "../components/Hero";
-import { useQuery, gql } from "@apollo/client";
 
 export default function Blog() {
-  const getPost = gql`
-    query allPosts {
-      post {
-        title
+  const [post, setPost] = useState(null);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("http://localhost:4000/api/v1/post", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        const res_data = await response.json();
+        console.log(res_data);
+        setPost(res_data.data);
+      } else {
+        const res_data = await response.json();
+        console.log(res_data);
       }
     }
-  `;
-
-  const { loading, error, data } = useQuery(getPost);
-
-  if (loading) {
-    return <div>loading</div>;
-  } else if (error) {
-    return <div>{error.message}</div>;
-  } else {
-    console.log(data);
-  }
+    fetchData();
+  }, []);
 
   return (
     <div>
       <Hero></Hero>
-      <Blogs></Blogs>
+      <Blogs posts={post}></Blogs>
     </div>
   );
 }

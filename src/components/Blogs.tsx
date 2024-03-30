@@ -1,9 +1,9 @@
 import { blogs } from "../constants";
 
-export default function Blogs() {
+export default function Blogs({ posts }: { posts: any }) {
   return (
     <div className="flex w-[70%]  justify-start gap-[70px] items-center flex-wrap  mx-auto ">
-      {blogs.map((el) => {
+      {posts.map((el: any) => {
         return (
           <div className="flex flex-col ">
             <div className="w-[400px]">

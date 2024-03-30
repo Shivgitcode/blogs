@@ -1,5 +1,5 @@
-import { gql, useMutation } from "@apollo/client";
 import { FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -9,19 +9,33 @@ export default function Login() {
     password: "",
   });
   const navigate = useNavigate();
-  const addUser = gql`
-    mutation addUser($user: UserInput) {
-      registerUser(user: $user)
-    }
-  `;
-  const [registerUser, { loading, error, data }] = useMutation(addUser);
-
-  if (loading) return "submitting ....";
-  if (error) return `${error.message}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    registerUser({ variables: { user: register } });
+    const response = await fetch("http://localhost:4000/api/v1/register", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify(register),
+    });
+
+    // const res_data = await response.json();
+    // console.log("this is res", res_data);
+    console.log(response);
+
+    if (response.ok) {
+      const res_data = await response.json();
+      console.log(res_data);
+      navigate("/login");
+    } else {
+      toast.error("cannot register");
+      // const res_data = await response.json();
+      // console.log(res_data);
+      // console.log(response);
+    }
 
     console.log(register);
   };

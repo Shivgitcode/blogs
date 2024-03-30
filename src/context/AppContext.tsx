@@ -1,8 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface ValueProp {
   login: boolean;
   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoggedIn: string;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const AppContext = createContext<ValueProp | undefined>(undefined);
@@ -13,10 +15,18 @@ export function AppContextProvider({
   children: React.ReactNode;
 }) {
   const [login, setLogin] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("jwt") as string
+  );
+  useEffect(() => {
+    setIsLoggedIn(isLoggedIn);
+  });
 
   const value = {
     login,
     setLogin,
+    isLoggedIn,
+    setIsLoggedIn,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
