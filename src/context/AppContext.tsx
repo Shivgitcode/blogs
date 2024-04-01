@@ -4,8 +4,8 @@ import Cookies from "js-cookie";
 interface ValueProp {
   login: boolean;
   setLogin: React.Dispatch<React.SetStateAction<boolean>>;
-  isLoggedIn: string;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<string>>;
+  isLoggedIn: string | undefined;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 export const AppContext = createContext<ValueProp | undefined>(undefined);
