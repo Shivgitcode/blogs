@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 interface ValueProp {
   login: boolean;
@@ -15,9 +16,7 @@ export function AppContextProvider({
   children: React.ReactNode;
 }) {
   const [login, setLogin] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("jwt") as string
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get("jwt"));
   useEffect(() => {
     setIsLoggedIn(isLoggedIn);
   });

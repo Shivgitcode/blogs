@@ -9,7 +9,7 @@ export default function Navbar() {
   const handleLogout = async () => {
     const response = await fetch("http://localhost:4000/api/v1/logout", {
       method: "POST",
-      credentials: "same-origin",
+      credentials: "include",
       mode: "cors",
     });
     console.log(response);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Blogs from "../components/Blogs";
 import Hero from "../components/Hero";
+import Cookies from "js-cookie";
 
 export default function Blog() {
   const [post, setPost] = useState(null);
@@ -14,6 +15,13 @@ export default function Blog() {
         mode: "cors",
         credentials: "include",
       });
+      // const cookieValue = document.cookie
+      //   .split("; ")
+      //   .find((ele) => ele.startsWith("jwt="))
+      //   ?.split("="[1]);
+
+      // console.log("this is cookie", cookieValue);
+      console.log("this is cookie", Cookies.get("jwt"));
 
       if (response.ok) {
         const res_data = await response.json();

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
 import { useAppContext } from "../context/AppContext";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [login, setLogin] = useState({ username: "", password: "" });

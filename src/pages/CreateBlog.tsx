@@ -1,10 +1,13 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateBlog() {
   const [quill, setQuill] = useState("");
   const [post, setPost] = useState({ title: "", imgFile: "", description: "" });
+  const navigate = useNavigate();
 
   const handlePost = (e: React.BaseSyntheticEvent) => {
     setPost((prev) => {
@@ -51,8 +54,11 @@ export default function CreateBlog() {
       body: formData,
     });
     console.log(response);
+
     if (response.ok) {
       const res_data = await response.json();
+      toast.success(res_data.message);
+      navigate("/");
       console.log(res_data);
     } else {
       const res_data = await response.json();
