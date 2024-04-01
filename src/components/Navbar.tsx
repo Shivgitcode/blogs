@@ -6,7 +6,13 @@ export default function Navbar() {
   const { isLoggedIn, setIsLoggedIn } = useAppContext();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    const response = await fetch("http://localhost:4000/api/v1/logout", {
+      method: "POST",
+      credentials: "same-origin",
+      mode: "cors",
+    });
+    console.log(response);
     localStorage.clear();
     setIsLoggedIn(localStorage.getItem("jwt") as string);
     navigate("/login");
